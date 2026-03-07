@@ -32,10 +32,11 @@ const projects = [
     href: "https://github.com/Oluwademiladeogo/backend.im-infra",
   },
   {
-    name: "Lucid AI",
+    name: "Lusic AI",
     description:
       "Preemptive risk-based vulnerability management for regulated industries — autonomous threat intelligence, real-time AI streaming, multi-tenant SaaS.",
     tech: ["Node.js", "Fastify", "PostgreSQL", "Lambda", "WebSocket"],
+    href: "https://lusic.ai",
   },
   {
     name: "Polymarket Bot",
