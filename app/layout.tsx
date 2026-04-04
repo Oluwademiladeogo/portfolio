@@ -16,19 +16,19 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Demilade Bickersteth",
   description:
-    "AI Engineer building voice agents, speech models, and autonomous systems.",
+    "AI Automation Specialist building voice agents, workflow automations, and autonomous business systems.",
   keywords: [
-    "AI Engineer",
-    "Machine Learning",
+    "AI Automation Specialist",
+    "Workflow Automation",
     "Voice AI",
-    "Speech Recognition",
+    "AI Agents",
     "Demilade Bickersteth",
   ],
   authors: [{ name: "Demilade Bickersteth" }],
   openGraph: {
     title: "Demilade Bickersteth",
     description:
-      "AI Engineer building voice agents, speech models, and autonomous systems.",
+      "AI Automation Specialist building voice agents, workflow automations, and autonomous business systems.",
     type: "website",
     locale: "en_US",
   },

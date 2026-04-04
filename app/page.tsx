@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const projects = [
   {
@@ -11,6 +12,14 @@ const projects = [
     href: "https://pruun.xyz",
   },
   {
+    name: "Missed Call Recovery System",
+    description:
+      "End-to-end automation that detects missed calls, texts back in under 60 seconds, qualifies leads via conversational AI, and books appointments — fully autonomous, 24/7.",
+    tech: ["n8n", "Twilio", "OpenAI", "Airtable", "Cal.com"],
+    href: "/projects/missed-call-recovery",
+    internal: true,
+  },
+  {
     name: "Turin",
     description:
       "Governed AI employees that execute tasks across 3,000+ business tools with configurable autonomy and full audit trails.",
@@ -18,18 +27,28 @@ const projects = [
     href: "https://turin.cc",
   },
   {
-    name: "VoxPreference",
+    name: "AI Proposal Generator",
     description:
-      "Fine-tuned wav2vec2 for Nigerian English ASR — 3,454 curated samples, published on HuggingFace, deployed via FastAPI.",
-    tech: ["PyTorch", "HuggingFace", "FastAPI", "wav2vec2"],
-    href: "https://huggingface.co/thebickersteth/wav2vec2-nigerian-english",
+      "Generates tailored client proposals with ROI projections, service breakdowns, and pricing — built on structured data extraction and templated AI output.",
+    tech: ["n8n", "OpenAI", "Airtable"],
+    href: "/projects/proposal-generator",
+    internal: true,
   },
   {
-    name: "K8s Test Rig",
+    name: "Lead Enrichment Pipeline",
     description:
-      "Distributed regression hunting in isolated Kubernetes namespaces. Replays commits via WebSocket until the exact breaking change surfaces.",
-    tech: ["Go", "Python", "Kubernetes", "WebSocket"],
-    href: "https://github.com/Oluwademiladeogo/backend.im-infra",
+      "Scrapes business listings, verifies emails, scores leads, and pushes qualified prospects into outreach sequences — fully automated prospecting.",
+    tech: ["n8n", "Google Maps API", "Email Verification", "Airtable"],
+    href: "/projects/lead-enrichment",
+    internal: true,
+  },
+  {
+    name: "Outreach Dispatcher",
+    description:
+      "Automated multi-step cold email sequences with personalization, follow-up scheduling, and reply monitoring — hands-off lead nurturing.",
+    tech: ["n8n", "Gmail API", "OpenAI", "Airtable"],
+    href: "/projects/outreach-dispatcher",
+    internal: true,
   },
   {
     name: "Lusic AI",
@@ -39,10 +58,19 @@ const projects = [
     href: "https://lusic.ai",
   },
   {
+    name: "VoxPreference",
+    description:
+      "Fine-tuned wav2vec2 for Nigerian English ASR — 3,454 curated samples, published on HuggingFace, deployed via FastAPI.",
+    tech: ["PyTorch", "HuggingFace", "FastAPI", "wav2vec2"],
+    href: "https://huggingface.co/thebickersteth/wav2vec2-nigerian-english",
+  },
+  {
     name: "Polymarket Bot",
     description:
       "Real-time arbitrage detection across binary prediction markets — scans every 45s for pricing inefficiencies.",
     tech: ["Node.js", "Polymarket API"],
+    href: "/projects/polymarket-bot",
+    internal: true,
   },
 ];
 
@@ -53,21 +81,9 @@ const work: Array<{
   href?: string;
 }> = [
   {
-    role: "Founder",
-    company: "Pruun",
-    period: "2026 —",
-    href: "https://pruun.xyz",
-  },
-  {
-    role: "Co-founder & Eng Lead",
+    role: "Cybersecurity Engineer → Engineering Lead",
     company: "Covenda Labs",
-    period: "2025 — 2026",
-    href: "https://covenda.ai",
-  },
-  {
-    role: "Cybersecurity Engineer",
-    company: "Covenda Labs",
-    period: "2024",
+    period: "2024 — 2026",
     href: "https://covenda.ai",
   },
   {
@@ -86,6 +102,7 @@ const work: Array<{
     role: "Backend Lead",
     company: "GDG Covenant University",
     period: "2023 — 2024",
+    href: "https://gdg.community.dev/gdg-on-campus-covenant-university-ota-nigeria/",
   },
 ];
 
@@ -126,24 +143,13 @@ export default function Home() {
           Demilade Bickersteth
         </h1>
         <p className="mt-1.5 font-mono text-sm text-neutral-500">
-          AI Engineer
+          AI Automation Specialist
         </p>
         <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-neutral-400">
-          I build AI systems that work in the real world — voice agents
-          screening thousands of candidates, speech models for 500M+ speakers,
-          and infrastructure that catches regressions before they ship.
-        </p>
-        <p className="mt-3 text-sm text-neutral-500">
-          Currently building{" "}
-          <a
-            href="https://pruun.xyz"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-neutral-300 transition-colors hover:text-neutral-100"
-          >
-            Pruun
-          </a>
-          .
+          I build AI systems that automate real business workflows — voice
+          agents screening thousands of candidates, missed-call recovery
+          that books appointments 24/7, and lead pipelines that run
+          themselves end to end.
         </p>
         <nav className="mt-6 flex flex-wrap gap-x-5 gap-y-2">
           {links.map((link) => (
@@ -196,15 +202,25 @@ export default function Home() {
               "group block -mx-3 px-3 py-4 rounded-lg transition-colors hover:bg-neutral-900/50";
 
             return project.href ? (
-              <a
-                key={project.name}
-                href={project.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cls}
-              >
-                {content}
-              </a>
+              project.internal ? (
+                <Link
+                  key={project.name}
+                  href={project.href}
+                  className={cls}
+                >
+                  {content}
+                </Link>
+              ) : (
+                <a
+                  key={project.name}
+                  href={project.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cls}
+                >
+                  {content}
+                </a>
+              )
             ) : (
               <div key={project.name} className={cls}>
                 {content}

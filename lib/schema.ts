@@ -2,9 +2,9 @@ export const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Demilade Bickersteth",
-  jobTitle: "AI Engineer",
+  jobTitle: "AI Automation Specialist",
   description:
-    "AI Engineer building voice agents, speech models, and autonomous systems.",
+    "AI Automation Specialist building voice agents, workflow automations, and autonomous business systems.",
   url: "https://bickersteth.com",
   sameAs: [
     "https://linkedin.com/in/bickersteth",
@@ -13,12 +13,12 @@ export const personSchema = {
   ],
   email: "bickerstethdemilade@gmail.com",
   knowsAbout: [
-    "Artificial Intelligence",
-    "Machine Learning",
+    "AI Automation",
+    "Workflow Automation",
     "Voice AI",
-    "Speech Recognition",
+    "Lead Generation Automation",
     "Natural Language Processing",
     "Software Engineering",
-    "Cloud Infrastructure",
+    "n8n",
   ],
 };
