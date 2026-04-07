@@ -25,14 +25,6 @@ const projects: Project[] = [
     category: "products",
   },
   {
-    name: "Turin",
-    description:
-      "Governed AI employees that execute tasks across 3,000+ business tools with configurable autonomy levels and full audit trails.",
-    tech: ["Next.js", "AI Agents", "3000+ Integrations"],
-    href: "https://turin.cc",
-    category: "products",
-  },
-  {
     name: "Lusic AI",
     description:
       "Preemptive risk-based vulnerability management for regulated industries — autonomous threat intelligence, real-time AI streaming, multi-tenant SaaS.",
@@ -83,9 +75,11 @@ const projects: Project[] = [
   {
     name: "VoxPreference",
     description:
-      "Fine-tuned wav2vec2 on 3,454 curated Nigerian English samples — published on HuggingFace, deployed via FastAPI.",
-    tech: ["PyTorch", "HuggingFace", "FastAPI", "wav2vec2"],
-    href: "https://huggingface.co/thebickersteth/wav2vec2-nigerian-english",
+      "Fine-tuned Meta's wav2vec2 (94M parameters) on Nigerian English speech — addresses the ASR gap for West African accented English. Dual-output: transcription + IPA phonetic notation.",
+    tech: ["PyTorch", "HuggingFace", "FastAPI", "wav2vec2", "React"],
+    href: "/projects/voxpreference",
+    internal: true,
+    screenshot: "/projects/voxpreference.png",
     category: "research",
   },
   {
@@ -150,31 +144,6 @@ const fadeUp = {
     transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
   },
 };
-
-function Avatar() {
-  const [error, setError] = useState(false);
-
-  if (error) {
-    return (
-      <div className="flex h-16 w-16 items-center justify-center rounded-full border border-neutral-800 bg-neutral-900 font-mono text-sm text-neutral-600">
-        DB
-      </div>
-    );
-  }
-
-  return (
-    <div className="h-16 w-16 overflow-hidden rounded-full border border-neutral-800">
-      <Image
-        src="/avatar.jpg"
-        alt="Demilade Bickersteth"
-        width={64}
-        height={64}
-        className="h-full w-full object-cover"
-        onError={() => setError(true)}
-      />
-    </div>
-  );
-}
 
 function ProjectRow({ project }: { project: Project }) {
   const cls =
@@ -253,46 +222,26 @@ export default function Home() {
     >
       {/* Hero */}
       <motion.header variants={fadeUp}>
-        <Avatar />
-
-        <div className="mt-5 mb-3 flex items-center gap-2">
-          <span className="relative flex h-1.5 w-1.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
-            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
-          </span>
-          <span className="font-mono text-xs text-neutral-500">
-            Available for work &middot; Building{" "}
-            <a
-              href="https://pruun.xyz"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-colors hover:text-neutral-300"
-            >
-              pruun.xyz
-            </a>
-          </span>
+        <div className="mb-6 h-16 w-16 overflow-hidden rounded-full border border-neutral-800">
+          <Image
+            src="/avatar.png"
+            alt="Demilade Bickersteth"
+            width={64}
+            height={64}
+            className="h-full w-full object-cover"
+          />
         </div>
 
         <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
           Demilade Bickersteth
         </h1>
         <p className="mt-2 font-mono text-sm text-neutral-500">
-          AI Automation Engineer
+          AI Automation Specialist
         </p>
 
         <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-neutral-400">
-          I&apos;m building{" "}
-          <a
-            href="https://pruun.xyz"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-neutral-300 transition-colors hover:text-white"
-          >
-            Pruun
-          </a>{" "}
-          — AI that screens thousands of job candidates by voice, autonomously.
-          Beyond that, I build the systems that make businesses run without
-          headcount: lead pipelines, voice agents, and orchestration layers that
+          I build AI systems that make businesses run without headcount — voice
+          agents, autonomous lead pipelines, and orchestration layers that
           compound value over time.
         </p>
 

@@ -153,6 +153,50 @@ export const automationProjects: AutomationProject[] = [
     ],
   },
   {
+    slug: "voxpreference",
+    name: "VoxPreference",
+    description:
+      "Fine-tuned Meta's wav2vec2 (94M parameters) on Nigerian English speech — addressing the ASR accuracy gap for West African accented English. Dual-output pipeline: transcription + IPA phonetic notation.",
+    tech: ["PyTorch", "HuggingFace", "FastAPI", "wav2vec2", "React"],
+    screenshot: "/projects/voxpreference.png",
+    problem:
+      "Standard ASR systems are trained predominantly on American and British English. Nigerian English — spoken by 220M+ people — has distinct phonological patterns these models consistently mishandle, producing high word error rates on everyday speech.",
+    impact:
+      "A 94.4M-parameter model fine-tuned on gender-balanced Nigerian English speech. Goes beyond transcription: produces IPA phonetic output for linguistic analysis. Published on HuggingFace, deployed on Spaces with a React frontend.",
+    steps: [
+      {
+        title: "Dataset preparation",
+        description:
+          "Gender-balanced corpus of Nigerian English speech (male and female speaker files), processed into a 90/10 train/validation split with audio stats tooling built to characterize the corpus.",
+      },
+      {
+        title: "Transfer learning setup",
+        description:
+          "Base model: facebook/wav2vec2-base-960h (960 hours of LibriSpeech). CNN feature encoder frozen to preserve acoustic representations — only the transformer layers and CTC head were fine-tuned on accent-specific phoneme distributions.",
+      },
+      {
+        title: "CTC training",
+        description:
+          "10 epochs with fp16 mixed precision, learning rate 1e-4, 500 warmup steps. Character-level CTC decoding. SpecAugment enabled for robustness against recording variation.",
+      },
+      {
+        title: "Inference API",
+        description:
+          "FastAPI endpoint accepts WAV, MP3, OGG, and FLAC uploads up to 50MB. Audio loaded at 16kHz via librosa, tokenized by Wav2Vec2Processor, argmax decoded from CTC output.",
+      },
+      {
+        title: "IPA phonetic conversion",
+        description:
+          "Transcriptions are converted to International Phonetic Alphabet notation via phonemizer + espeak backend — enabling downstream linguistic analysis of accent-specific phoneme patterns.",
+      },
+      {
+        title: "Deployment",
+        description:
+          "Model published on HuggingFace (thebickersteth/wav2vec2-nigerian-english). Full system deployed on HuggingFace Spaces via Docker, with a React + TypeScript frontend for drag-and-drop audio upload.",
+      },
+    ],
+  },
+  {
     slug: "polymarket-bot",
     name: "Polymarket Bot",
     description:
