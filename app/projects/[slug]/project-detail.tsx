@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import type { AutomationProject } from "@/lib/automation-projects";
 
+const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 const stagger = {
   animate: { transition: { staggerChildren: 0.1 } },
 };
@@ -68,7 +70,7 @@ export default function ProjectDetail({
       >
         <div className="relative aspect-video w-full">
           <Image
-            src={project.screenshot}
+            src={`${base}${project.screenshot}`}
             alt={`${project.name} workflow`}
             fill
             className={project.imageContain ? "object-contain p-6" : "object-cover"}

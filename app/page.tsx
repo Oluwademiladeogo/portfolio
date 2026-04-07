@@ -136,6 +136,8 @@ const work: {
   },
 ];
 
+const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 const stagger = {
   animate: { transition: { staggerChildren: 0.07 } },
 };
@@ -175,7 +177,7 @@ function ProjectRow({ project }: { project: Project }) {
       <div className="relative hidden h-14 w-24 shrink-0 overflow-hidden rounded-md border border-neutral-800 opacity-70 transition-opacity group-hover:opacity-100 sm:block">
         {project.screenshot ? (
           <Image
-            src={project.screenshot}
+            src={`${base}${project.screenshot}`}
             alt=""
             fill
             className="object-cover"
@@ -228,7 +230,7 @@ export default function Home() {
       <motion.header variants={fadeUp}>
         <div className="mb-6 h-16 w-16 overflow-hidden rounded-full border border-neutral-800">
           <Image
-            src="/avatar.png"
+            src={`${base}/avatar.png`}
             alt="Demilade Bickersteth"
             width={64}
             height={64}
