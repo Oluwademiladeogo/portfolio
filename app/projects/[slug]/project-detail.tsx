@@ -54,18 +54,32 @@ export default function ProjectDetail({
       {/* Screenshot */}
       <motion.div
         variants={fadeUp}
-        className="mt-10 overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50"
+        className={`mt-10 overflow-hidden rounded-lg border border-neutral-800 ${project.imageContain ? "bg-white" : "bg-neutral-900/50"}`}
       >
         <div className="relative aspect-video w-full">
           <Image
             src={project.screenshot}
             alt={`${project.name} workflow`}
             fill
-            className="object-cover"
+            className={project.imageContain ? "object-contain p-6" : "object-cover"}
             sizes="(max-width: 672px) 100vw, 672px"
           />
         </div>
       </motion.div>
+
+      {/* Live demo link */}
+      {project.liveUrl && (
+        <motion.div variants={fadeUp} className="mt-4">
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 font-mono text-xs text-neutral-500 transition-colors hover:text-neutral-200"
+          >
+            Try it live ↗
+          </a>
+        </motion.div>
+      )}
 
       {/* Problem + Impact */}
       {(project.problem || project.impact) && (

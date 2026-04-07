@@ -49,21 +49,21 @@ const projects: Project[] = [
   {
     name: "Lead Enrichment Pipeline",
     description:
-      "Scrapes listings, verifies emails, scores by fit, and pushes qualified prospects directly into outreach sequences. No manual research.",
-    tech: ["n8n", "Google Maps API", "Email Verification", "Airtable"],
+      "Full-stack lead gen platform — define a target role and industry, get back scored, email-verified, LinkedIn-confirmed prospects ready for outreach.",
+    tech: ["n8n", "Google Maps API", "Email Verification", "React", "Cloudflare Pages"],
     href: "/projects/lead-enrichment",
     internal: true,
     screenshot: "/projects/lead-enrichment.png",
     category: "automations",
   },
   {
-    name: "Outreach Dispatcher",
+    name: "Content Automation",
     description:
-      "Personalized multi-step cold email sequences that adapt to reply behavior and pause on engagement — hands-off nurturing at scale.",
-    tech: ["n8n", "Gmail API", "OpenAI", "Airtable"],
-    href: "/projects/outreach-dispatcher",
+      "End-to-end content production system — raw idea to published post. Handles research, audience targeting, AI drafting, and calendar scheduling.",
+    tech: ["n8n", "OpenAI", "Airtable", "React", "Cloudflare Pages"],
+    href: "/projects/content-automation",
     internal: true,
-    screenshot: "/projects/outreach-dispatcher.png",
+    screenshot: "/projects/content-automation.png",
     category: "automations",
   },
   {

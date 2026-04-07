@@ -8,6 +8,8 @@ export type AutomationProject = {
   problem?: string;
   impact?: string;
   stepsLabel?: string;
+  imageContain?: boolean;
+  liveUrl?: string;
   steps: { title: string; description: string }[];
 };
 
@@ -131,6 +133,7 @@ export const automationProjects: AutomationProject[] = [
       "Scrapes business listings, verifies emails, scores leads, and pushes qualified prospects into outreach sequences — fully automated prospecting.",
     tech: ["n8n", "Google Maps API", "Email Verification", "Airtable"],
     screenshot: "/projects/lead-enrichment.png",
+    liveUrl: "https://demi-lead-gen.pages.dev",
     problem:
       "Manual prospecting is slow, inconsistent, and expensive. Sales reps spend 40% of their time on research that could be automated — and most of that data goes stale before it gets used.",
     impact:
@@ -193,6 +196,46 @@ export const automationProjects: AutomationProject[] = [
     ],
   },
   {
+    slug: "content-automation",
+    name: "Content Automation",
+    description:
+      "End-to-end content production system — takes a raw idea or URL, researches context, generates platform-optimised content, and publishes on schedule. Zero manual writing.",
+    tech: ["n8n", "OpenAI", "Airtable", "React", "Cloudflare Pages"],
+    screenshot: "/projects/content-automation.png",
+    liveUrl: "https://demi-content-automation.pages.dev",
+    problem:
+      "Consistent content output is one of the highest-leverage growth levers for founders and operators — and one of the hardest to maintain. Most teams either hire writers (slow, expensive) or post sporadically (ineffective).",
+    impact:
+      "A full content production workspace: idea to published post in minutes. Handles audience targeting, tone calibration, AI drafting, and scheduling — with a calendar view and team workspace for review.",
+    steps: [
+      {
+        title: "Content seed",
+        description:
+          "Input a raw idea, topic brief, or source URL. The system accepts multiple input types and routes each through the appropriate generation pipeline.",
+      },
+      {
+        title: "Audience + tone calibration",
+        description:
+          "Target audience (Founders, C-Suite, SMB owners, etc.) and tone (Authoritative, Conversational, etc.) are configured per piece — shaping the AI output before generation starts.",
+      },
+      {
+        title: "AI research & generation",
+        description:
+          "OpenAI drafts the full piece — tweet thread, LinkedIn post, or long-form — structured for the target platform and audience. Context from the seed is woven throughout.",
+      },
+      {
+        title: "Quick Polish",
+        description:
+          "Built-in refinement tool for tightening copy, adjusting tone, or reworking sections before the piece moves to review.",
+      },
+      {
+        title: "Calendar scheduling + publish",
+        description:
+          "Approved content is slotted into the content calendar and published to target channels on schedule. Full team workspace with role-based access.",
+      },
+    ],
+  },
+  {
     slug: "lusic-ai",
     name: "Lusic AI",
     description:
@@ -243,6 +286,7 @@ export const automationProjects: AutomationProject[] = [
     impact:
       "A 94.4M-parameter model fine-tuned on gender-balanced Nigerian English speech. Goes beyond transcription: produces IPA phonetic output for linguistic analysis. Published on HuggingFace, deployed on Spaces with a React frontend.",
     stepsLabel: "How it's built",
+    imageContain: true,
     steps: [
       {
         title: "Dataset preparation",
