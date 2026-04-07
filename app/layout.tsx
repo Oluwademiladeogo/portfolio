@@ -14,6 +14,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://demiladebickersteth.com"),
   title: "Demilade Bickersteth",
   description:
     "AI Automation Specialist building voice agents, workflow automations, and autonomous business systems.",
@@ -57,7 +58,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} min-h-screen bg-neutral-950 font-sans antialiased`}
+        className={`${inter.variable} ${jetbrainsMono.variable} min-h-screen bg-black font-sans antialiased`}
         suppressHydrationWarning
       >
         {children}

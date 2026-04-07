@@ -139,27 +139,52 @@ const work: {
 ];
 
 const stagger = {
-  animate: { transition: { staggerChildren: 0.08 } },
+  animate: { transition: { staggerChildren: 0.07 } },
 };
 
 const fadeUp = {
-  initial: { opacity: 0, y: 8 },
+  initial: { opacity: 0, y: 10 },
   animate: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.45, ease: [0.25, 0.1, 0.25, 1] },
+    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
   },
 };
 
+function Avatar() {
+  const [error, setError] = useState(false);
+
+  if (error) {
+    return (
+      <div className="flex h-16 w-16 items-center justify-center rounded-full border border-neutral-800 bg-neutral-900 font-mono text-sm text-neutral-600">
+        DB
+      </div>
+    );
+  }
+
+  return (
+    <div className="h-16 w-16 overflow-hidden rounded-full border border-neutral-800">
+      <Image
+        src="/avatar.jpg"
+        alt="Demilade Bickersteth"
+        width={64}
+        height={64}
+        className="h-full w-full object-cover"
+        onError={() => setError(true)}
+      />
+    </div>
+  );
+}
+
 function ProjectRow({ project }: { project: Project }) {
   const cls =
-    "group flex items-start gap-4 -mx-3 px-3 py-4 rounded-lg transition-colors hover:bg-neutral-900/50";
+    "group flex items-start gap-4 -mx-3 px-3 py-4 rounded-lg transition-colors hover:bg-white/[0.03]";
 
   const content = (
     <>
       <div className="min-w-0 flex-1">
         <div className="flex items-center justify-between gap-4">
-          <h3 className="text-[15px] font-medium text-neutral-300 transition-colors group-hover:text-neutral-100">
+          <h3 className="text-[15px] font-medium text-neutral-200 transition-colors group-hover:text-white">
             {project.name}
           </h3>
           <span className="shrink-0 text-xs text-neutral-700 transition-colors group-hover:text-neutral-400">
@@ -169,12 +194,12 @@ function ProjectRow({ project }: { project: Project }) {
         <p className="mt-1 text-sm leading-relaxed text-neutral-500">
           {project.description}
         </p>
-        <p className="mt-2 font-mono text-[11px] text-neutral-700 transition-colors group-hover:text-neutral-600">
+        <p className="mt-2 font-mono text-[11px] text-neutral-700 transition-colors group-hover:text-neutral-500">
           {project.tech.join(" · ")}
         </p>
       </div>
 
-      <div className="relative hidden h-12 w-20 shrink-0 overflow-hidden rounded border border-neutral-800 opacity-40 transition-opacity group-hover:opacity-80 sm:block">
+      <div className="relative hidden h-12 w-20 shrink-0 overflow-hidden rounded border border-neutral-800/80 opacity-40 transition-opacity group-hover:opacity-90 sm:block">
         {project.screenshot ? (
           <Image
             src={project.screenshot}
@@ -184,7 +209,7 @@ function ProjectRow({ project }: { project: Project }) {
             sizes="80px"
           />
         ) : (
-          <div className="h-full w-full bg-gradient-to-br from-neutral-900 to-neutral-800" />
+          <div className="h-full w-full bg-neutral-900" />
         )}
       </div>
     </>
@@ -228,27 +253,47 @@ export default function Home() {
     >
       {/* Hero */}
       <motion.header variants={fadeUp}>
-        <div className="mb-4 flex items-center gap-2">
+        <Avatar />
+
+        <div className="mt-5 mb-3 flex items-center gap-2">
           <span className="relative flex h-1.5 w-1.5">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
           </span>
           <span className="font-mono text-xs text-neutral-500">
-            Available for work
+            Available for work &middot; Building{" "}
+            <a
+              href="https://pruun.xyz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-neutral-300"
+            >
+              pruun.xyz
+            </a>
           </span>
         </div>
 
-        <h1 className="text-2xl font-semibold tracking-tight text-neutral-100 sm:text-3xl">
+        <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
           Demilade Bickersteth
         </h1>
-        <p className="mt-1.5 font-mono text-sm text-neutral-500">
+        <p className="mt-2 font-mono text-sm text-neutral-500">
           AI Automation Engineer
         </p>
+
         <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-neutral-400">
-          I build AI systems that automate real business workflows — voice
-          agents screening thousands of candidates, lead pipelines that qualify
-          and book without human input, and orchestration layers that compound
-          value over time.
+          I&apos;m building{" "}
+          <a
+            href="https://pruun.xyz"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-neutral-300 transition-colors hover:text-white"
+          >
+            Pruun
+          </a>{" "}
+          — AI that screens thousands of job candidates by voice, autonomously.
+          Beyond that, I build the systems that make businesses run without
+          headcount: lead pipelines, voice agents, and orchestration layers that
+          compound value over time.
         </p>
 
         <nav className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
@@ -301,11 +346,11 @@ export default function Home() {
         {categories.map((cat, ci) => {
           const catProjects = projects.filter((p) => p.category === cat.key);
           return (
-            <div key={cat.key} className={ci > 0 ? "mt-12" : ""}>
+            <div key={cat.key} className={ci > 0 ? "mt-14" : ""}>
               <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-neutral-600">
                 {cat.label}
               </h2>
-              <div className="mt-6 space-y-1">
+              <div className="mt-5 space-y-1">
                 {catProjects.map((project) => (
                   <ProjectRow key={project.name} project={project} />
                 ))}
@@ -330,18 +375,18 @@ export default function Home() {
                 <span className="font-medium text-neutral-200">
                   {item.role}
                 </span>
-                <span className="text-neutral-600">, </span>
+                <span className="text-neutral-700">, </span>
                 {item.href ? (
                   <a
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-neutral-400 transition-colors hover:text-neutral-200"
+                    className="text-neutral-500 transition-colors hover:text-neutral-200"
                   >
                     {item.company}
                   </a>
                 ) : (
-                  <span>{item.company}</span>
+                  <span className="text-neutral-500">{item.company}</span>
                 )}
               </p>
               <span className="shrink-0 font-mono text-xs text-neutral-700">
@@ -355,7 +400,7 @@ export default function Home() {
       {/* Footer */}
       <motion.footer
         variants={fadeUp}
-        className="mt-16 border-t border-neutral-900 pt-6 pb-8 md:mt-20"
+        className="mt-16 border-t border-white/5 pt-6 pb-8 md:mt-20"
       >
         <p className="text-xs text-neutral-700">
           &copy; {new Date().getFullYear()} Demilade Bickersteth
