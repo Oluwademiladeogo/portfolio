@@ -69,12 +69,12 @@ export default function ProjectDetail({
 
       {/* Live demo link */}
       {project.liveUrl && (
-        <motion.div variants={fadeUp} className="mt-4">
+        <motion.div variants={fadeUp} className="mt-5">
           <a
             href={project.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 font-mono text-xs text-neutral-500 transition-colors hover:text-neutral-200"
+            className="inline-flex items-center gap-2 rounded-md border border-neutral-700 bg-neutral-900 px-4 py-2 text-sm font-medium text-neutral-200 transition-colors hover:border-neutral-500 hover:text-white"
           >
             Try it live ↗
           </a>

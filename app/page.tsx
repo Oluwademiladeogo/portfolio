@@ -172,14 +172,14 @@ function ProjectRow({ project }: { project: Project }) {
         </p>
       </div>
 
-      <div className="relative hidden h-12 w-20 shrink-0 overflow-hidden rounded border border-neutral-800/80 opacity-40 transition-opacity group-hover:opacity-90 sm:block">
+      <div className="relative hidden h-14 w-24 shrink-0 overflow-hidden rounded-md border border-neutral-800 opacity-70 transition-opacity group-hover:opacity-100 sm:block">
         {project.screenshot ? (
           <Image
             src={project.screenshot}
             alt=""
             fill
             className="object-cover"
-            sizes="80px"
+            sizes="96px"
           />
         ) : (
           <div className="h-full w-full bg-neutral-900" />
