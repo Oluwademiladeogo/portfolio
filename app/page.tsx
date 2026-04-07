@@ -21,7 +21,9 @@ const projects: Project[] = [
     description:
       "AI voice agent that screens thousands of candidates autonomously — trait-based scoring, real-time transcription, automated report generation.",
     tech: ["NestJS", "Vapi.ai", "PostgreSQL", "BullMQ", "Next.js"],
-    href: "https://pruun.xyz",
+    href: "/projects/pruun",
+    internal: true,
+    screenshot: "/projects/pruun.png",
     category: "products",
   },
   {

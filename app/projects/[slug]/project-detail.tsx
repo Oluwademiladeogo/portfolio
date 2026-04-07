@@ -93,10 +93,10 @@ export default function ProjectDetail({
         </motion.section>
       )}
 
-      {/* How it works */}
+      {/* How it works / How it's built */}
       <motion.section variants={fadeUp} className="mt-12">
         <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-neutral-600">
-          How it works
+          {project.stepsLabel ?? "How it works"}
         </h2>
         <div className="mt-8 space-y-6">
           {project.steps.map((step, i) => (

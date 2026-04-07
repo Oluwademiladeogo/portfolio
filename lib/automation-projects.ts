@@ -7,10 +7,50 @@ export type AutomationProject = {
   youtubeId?: string;
   problem?: string;
   impact?: string;
+  stepsLabel?: string;
   steps: { title: string; description: string }[];
 };
 
 export const automationProjects: AutomationProject[] = [
+  {
+    slug: "pruun",
+    name: "Pruun",
+    description:
+      "AI voice agent that screens thousands of candidates autonomously — trait-based scoring, real-time transcription, automated report generation.",
+    tech: ["NestJS", "Vapi.ai", "PostgreSQL", "BullMQ", "Next.js"],
+    screenshot: "/projects/pruun.png",
+    problem:
+      "Screening candidates at scale is expensive and slow. Recruiters spend 60–70% of their time on initial phone screens — most of which filter out unqualified candidates before a real conversation ever happens.",
+    impact:
+      "Pruun handles the entire first-round screen autonomously: calls candidates, conducts structured interviews, scores against configurable trait rubrics, and delivers ranked reports — with no recruiter time spent.",
+    steps: [
+      {
+        title: "Round configured",
+        description:
+          "Hiring teams define the role requirements, trait rubrics, scoring weights, and interview questions. Pruun uses this to drive every conversation in that round.",
+      },
+      {
+        title: "AI-driven interview",
+        description:
+          "A voice agent conducts a structured interview in real time, dynamically following up on candidate responses while staying within the configured question set.",
+      },
+      {
+        title: "Live transcription",
+        description:
+          "The entire conversation is transcribed in real time. Transcripts are stored in PostgreSQL and tied to the candidate record for auditability.",
+      },
+      {
+        title: "Trait scoring",
+        description:
+          "Transcripts are analyzed against the role's trait rubrics using OpenAI — scoring communication clarity, technical depth, role fit, and any custom dimensions the team defined.",
+      },
+      {
+        title: "Report delivered",
+        description:
+          "A structured candidate report is generated with scores, verbatim highlights, and red flags — pushed to the hiring dashboard for async review. No scheduling required.",
+      },
+    ],
+  },
   {
     slug: "missed-call-recovery",
     name: "Missed Call Recovery System",
@@ -163,6 +203,7 @@ export const automationProjects: AutomationProject[] = [
       "Standard ASR systems are trained predominantly on American and British English. Nigerian English — spoken by 220M+ people — has distinct phonological patterns these models consistently mishandle, producing high word error rates on everyday speech.",
     impact:
       "A 94.4M-parameter model fine-tuned on gender-balanced Nigerian English speech. Goes beyond transcription: produces IPA phonetic output for linguistic analysis. Published on HuggingFace, deployed on Spaces with a React frontend.",
+    stepsLabel: "How it's built",
     steps: [
       {
         title: "Dataset preparation",
