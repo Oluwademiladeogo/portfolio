@@ -225,11 +225,6 @@ export const automationProjects: AutomationProject[] = [
           "The built-in AI assistant lets analysts describe scenarios or proposed changes in natural language. Lucid simulates the downstream risk impact before any changes are made — changes are isolated and non-destructive.",
       },
       {
-        title: "Real-time streaming dashboard",
-        description:
-          "Risk scores and threat model updates stream to the dashboard in real time via WebSocket. The matrix view shows which vulnerabilities sit in Critical Exposure vs Controlled Risk vs Well Managed zones.",
-      },
-      {
         title: "Prioritised remediation output",
         description:
           "Teams receive a ranked remediation queue ordered by business impact, not raw severity — so effort goes to the vulnerabilities that actually move the risk needle.",
