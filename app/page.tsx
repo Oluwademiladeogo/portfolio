@@ -31,7 +31,9 @@ const projects: Project[] = [
     description:
       "Preemptive risk-based vulnerability management for regulated industries — autonomous threat intelligence, real-time AI streaming, multi-tenant SaaS.",
     tech: ["Node.js", "Fastify", "PostgreSQL", "Lambda", "WebSocket"],
-    href: "https://lusic.ai",
+    href: "/projects/lusic-ai",
+    internal: true,
+    screenshot: "/projects/lusic-ai.png",
     category: "products",
   },
   {

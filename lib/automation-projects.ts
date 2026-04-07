@@ -193,6 +193,50 @@ export const automationProjects: AutomationProject[] = [
     ],
   },
   {
+    slug: "lusic-ai",
+    name: "Lusic AI",
+    description:
+      "Preemptive risk-based vulnerability management for regulated industries — autonomous threat intelligence, real-time AI streaming, multi-tenant SaaS.",
+    tech: ["Node.js", "Fastify", "PostgreSQL", "Lambda", "WebSocket"],
+    screenshot: "/projects/lusic-ai.png",
+    problem:
+      "Security teams in regulated industries are drowning in vulnerability alerts with no clear prioritisation. Standard scanners output raw CVE lists — leaving analysts to manually figure out what actually matters to the business before they can act.",
+    impact:
+      "Lusic maps vulnerabilities to real business impact — financial exposure, customer risk, and security health scores — so teams see what to fix first, not just what's broken. The AI simulation layer lets analysts model scenarios before committing to remediation.",
+    steps: [
+      {
+        title: "Asset and control ingestion",
+        description:
+          "Lusic ingests the organisation's asset inventory, existing security controls, and compliance posture into a multi-tenant data model scoped per organisation.",
+      },
+      {
+        title: "Threat intelligence mapping",
+        description:
+          "Vulnerabilities are mapped against live threat intelligence feeds and scored not just by CVSS severity but by business context — financial exposure, customer impact, and organisational capacity.",
+      },
+      {
+        title: "Risk model computation",
+        description:
+          "The threat model computes a risk landscape across four dimensions: Financial Impact, Customer Impact, Security Health, and Organisational Capacity (KSA). Outputs are plotted on a cybersecurity effectiveness matrix.",
+      },
+      {
+        title: "AI simulation via Lucid",
+        description:
+          "The built-in AI assistant lets analysts describe scenarios or proposed changes in natural language. Lucid simulates the downstream risk impact before any changes are made — changes are isolated and non-destructive.",
+      },
+      {
+        title: "Real-time streaming dashboard",
+        description:
+          "Risk scores and threat model updates stream to the dashboard in real time via WebSocket. The matrix view shows which vulnerabilities sit in Critical Exposure vs Controlled Risk vs Well Managed zones.",
+      },
+      {
+        title: "Prioritised remediation output",
+        description:
+          "Teams receive a ranked remediation queue ordered by business impact, not raw severity — so effort goes to the vulnerabilities that actually move the risk needle.",
+      },
+    ],
+  },
+  {
     slug: "voxpreference",
     name: "VoxPreference",
     description:
