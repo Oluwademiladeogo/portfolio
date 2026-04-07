@@ -1,54 +1,36 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
-const projects = [
+type Project = {
+  name: string;
+  description: string;
+  tech: string[];
+  href: string;
+  internal?: boolean;
+  screenshot?: string;
+  category: "products" | "automations" | "research";
+};
+
+const projects: Project[] = [
   {
     name: "Pruun",
     description:
       "AI voice agent that screens thousands of candidates autonomously — trait-based scoring, real-time transcription, automated report generation.",
     tech: ["NestJS", "Vapi.ai", "PostgreSQL", "BullMQ", "Next.js"],
     href: "https://pruun.xyz",
-  },
-  {
-    name: "Missed Call Recovery System",
-    description:
-      "End-to-end automation that detects missed calls, texts back in under 60 seconds, qualifies leads via conversational AI, and books appointments — fully autonomous, 24/7.",
-    tech: ["n8n", "Twilio", "OpenAI", "Airtable", "Cal.com"],
-    href: "/projects/missed-call-recovery",
-    internal: true,
+    category: "products",
   },
   {
     name: "Turin",
     description:
-      "Governed AI employees that execute tasks across 3,000+ business tools with configurable autonomy and full audit trails.",
+      "Governed AI employees that execute tasks across 3,000+ business tools with configurable autonomy levels and full audit trails.",
     tech: ["Next.js", "AI Agents", "3000+ Integrations"],
     href: "https://turin.cc",
-  },
-  {
-    name: "AI Proposal Generator",
-    description:
-      "Generates tailored client proposals with ROI projections, service breakdowns, and pricing — built on structured data extraction and templated AI output.",
-    tech: ["n8n", "OpenAI", "Airtable"],
-    href: "/projects/proposal-generator",
-    internal: true,
-  },
-  {
-    name: "Lead Enrichment Pipeline",
-    description:
-      "Scrapes business listings, verifies emails, scores leads, and pushes qualified prospects into outreach sequences — fully automated prospecting.",
-    tech: ["n8n", "Google Maps API", "Email Verification", "Airtable"],
-    href: "/projects/lead-enrichment",
-    internal: true,
-  },
-  {
-    name: "Outreach Dispatcher",
-    description:
-      "Automated multi-step cold email sequences with personalization, follow-up scheduling, and reply monitoring — hands-off lead nurturing.",
-    tech: ["n8n", "Gmail API", "OpenAI", "Airtable"],
-    href: "/projects/outreach-dispatcher",
-    internal: true,
+    category: "products",
   },
   {
     name: "Lusic AI",
@@ -56,30 +38,80 @@ const projects = [
       "Preemptive risk-based vulnerability management for regulated industries — autonomous threat intelligence, real-time AI streaming, multi-tenant SaaS.",
     tech: ["Node.js", "Fastify", "PostgreSQL", "Lambda", "WebSocket"],
     href: "https://lusic.ai",
+    category: "products",
+  },
+  {
+    name: "Missed Call Recovery System",
+    description:
+      "Missed call → AI-qualified SMS conversation → booked appointment. Responds in under 60 seconds, runs 24/7, zero human involvement.",
+    tech: ["n8n", "Twilio", "OpenAI", "Airtable", "Cal.com"],
+    href: "/projects/missed-call-recovery",
+    internal: true,
+    screenshot: "/projects/missed-call-recovery.png",
+    category: "automations",
+  },
+  {
+    name: "Lead Enrichment Pipeline",
+    description:
+      "Scrapes listings, verifies emails, scores by fit, and pushes qualified prospects directly into outreach sequences. No manual research.",
+    tech: ["n8n", "Google Maps API", "Email Verification", "Airtable"],
+    href: "/projects/lead-enrichment",
+    internal: true,
+    screenshot: "/projects/lead-enrichment.png",
+    category: "automations",
+  },
+  {
+    name: "Outreach Dispatcher",
+    description:
+      "Personalized multi-step cold email sequences that adapt to reply behavior and pause on engagement — hands-off nurturing at scale.",
+    tech: ["n8n", "Gmail API", "OpenAI", "Airtable"],
+    href: "/projects/outreach-dispatcher",
+    internal: true,
+    screenshot: "/projects/outreach-dispatcher.png",
+    category: "automations",
+  },
+  {
+    name: "AI Proposal Generator",
+    description:
+      "Generates tailored client proposals with ROI projections and service breakdowns in under 3 minutes — genuinely personalized, not templated.",
+    tech: ["n8n", "OpenAI", "Airtable"],
+    href: "/projects/proposal-generator",
+    internal: true,
+    screenshot: "/projects/proposal-generator.png",
+    category: "automations",
   },
   {
     name: "VoxPreference",
     description:
-      "Fine-tuned wav2vec2 for Nigerian English ASR — 3,454 curated samples, published on HuggingFace, deployed via FastAPI.",
+      "Fine-tuned wav2vec2 on 3,454 curated Nigerian English samples — published on HuggingFace, deployed via FastAPI.",
     tech: ["PyTorch", "HuggingFace", "FastAPI", "wav2vec2"],
     href: "https://huggingface.co/thebickersteth/wav2vec2-nigerian-english",
+    category: "research",
   },
   {
     name: "Polymarket Bot",
     description:
-      "Real-time arbitrage detection across binary prediction markets — scans every 45s for pricing inefficiencies.",
+      "Scans all active binary prediction markets every 45 seconds for pricing inefficiencies. Surfaces arbitrage windows above a configurable profit threshold.",
     tech: ["Node.js", "Polymarket API"],
     href: "/projects/polymarket-bot",
     internal: true,
+    screenshot: "/projects/polymarket-bot.png",
+    category: "research",
   },
 ];
 
-const work: Array<{
+const categories = [
+  { key: "products" as const, label: "Products" },
+  { key: "automations" as const, label: "Automations" },
+  { key: "research" as const, label: "Research" },
+];
+
+const work: {
   role: string;
   company: string;
   period: string;
   href?: string;
-}> = [
+}[] = [
   {
     role: "Cybersecurity Engineer → Engineering Lead",
     company: "Covenda Labs",
@@ -106,30 +138,87 @@ const work: Array<{
   },
 ];
 
-const links = [
-  { label: "GitHub", href: "https://github.com/Oluwademiladeogo" },
-  { label: "LinkedIn", href: "https://linkedin.com/in/bickersteth" },
-  {
-    label: "HuggingFace",
-    href: "https://huggingface.co/thebickersteth",
-  },
-  { label: "Email", href: "mailto:bickerstethdemilade@gmail.com" },
-];
-
 const stagger = {
-  animate: { transition: { staggerChildren: 0.12 } },
+  animate: { transition: { staggerChildren: 0.08 } },
 };
 
 const fadeUp = {
-  initial: { opacity: 0, y: 10 },
+  initial: { opacity: 0, y: 8 },
   animate: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
+    transition: { duration: 0.45, ease: [0.25, 0.1, 0.25, 1] },
   },
 };
 
+function ProjectRow({ project }: { project: Project }) {
+  const cls =
+    "group flex items-start gap-4 -mx-3 px-3 py-4 rounded-lg transition-colors hover:bg-neutral-900/50";
+
+  const content = (
+    <>
+      <div className="min-w-0 flex-1">
+        <div className="flex items-center justify-between gap-4">
+          <h3 className="text-[15px] font-medium text-neutral-300 transition-colors group-hover:text-neutral-100">
+            {project.name}
+          </h3>
+          <span className="shrink-0 text-xs text-neutral-700 transition-colors group-hover:text-neutral-400">
+            {project.internal ? "→" : "↗"}
+          </span>
+        </div>
+        <p className="mt-1 text-sm leading-relaxed text-neutral-500">
+          {project.description}
+        </p>
+        <p className="mt-2 font-mono text-[11px] text-neutral-700 transition-colors group-hover:text-neutral-600">
+          {project.tech.join(" · ")}
+        </p>
+      </div>
+
+      <div className="relative hidden h-12 w-20 shrink-0 overflow-hidden rounded border border-neutral-800 opacity-40 transition-opacity group-hover:opacity-80 sm:block">
+        {project.screenshot ? (
+          <Image
+            src={project.screenshot}
+            alt=""
+            fill
+            className="object-cover"
+            sizes="80px"
+          />
+        ) : (
+          <div className="h-full w-full bg-gradient-to-br from-neutral-900 to-neutral-800" />
+        )}
+      </div>
+    </>
+  );
+
+  if (project.internal) {
+    return (
+      <Link href={project.href} className={cls}>
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <a
+      href={project.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={cls}
+    >
+      {content}
+    </a>
+  );
+}
+
 export default function Home() {
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText("bickerstethdemilade@gmail.com");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <motion.main
       className="mx-auto max-w-2xl px-6 py-16 md:py-24"
@@ -139,95 +228,91 @@ export default function Home() {
     >
       {/* Hero */}
       <motion.header variants={fadeUp}>
+        <div className="mb-4 flex items-center gap-2">
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
+          </span>
+          <span className="font-mono text-xs text-neutral-500">
+            Available for work
+          </span>
+        </div>
+
         <h1 className="text-2xl font-semibold tracking-tight text-neutral-100 sm:text-3xl">
           Demilade Bickersteth
         </h1>
         <p className="mt-1.5 font-mono text-sm text-neutral-500">
-          AI Automation Specialist
+          AI Automation Engineer
         </p>
         <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-neutral-400">
           I build AI systems that automate real business workflows — voice
-          agents screening thousands of candidates, missed-call recovery
-          that books appointments 24/7, and lead pipelines that run
-          themselves end to end.
+          agents screening thousands of candidates, lead pipelines that qualify
+          and book without human input, and orchestration layers that compound
+          value over time.
         </p>
-        <nav className="mt-6 flex flex-wrap gap-x-5 gap-y-2">
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target={link.href.startsWith("mailto") ? undefined : "_blank"}
-              rel={
-                link.href.startsWith("mailto")
-                  ? undefined
-                  : "noopener noreferrer"
-              }
-              className="text-sm text-neutral-500 transition-colors hover:text-neutral-200"
-            >
-              {link.label}
-            </a>
-          ))}
+
+        <nav className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
+          <a
+            href="https://github.com/Oluwademiladeogo"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-neutral-500 transition-colors hover:text-neutral-200"
+          >
+            GitHub
+          </a>
+          <a
+            href="https://linkedin.com/in/bickersteth"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-neutral-500 transition-colors hover:text-neutral-200"
+          >
+            LinkedIn
+          </a>
+          <a
+            href="https://huggingface.co/thebickersteth"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-neutral-500 transition-colors hover:text-neutral-200"
+          >
+            HuggingFace
+          </a>
+          <button
+            onClick={copyEmail}
+            className="text-sm text-neutral-500 transition-colors hover:text-neutral-200"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.span
+                key={copied ? "copied" : "email"}
+                initial={{ opacity: 0, y: 4 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -4 }}
+                transition={{ duration: 0.15 }}
+                className="block"
+              >
+                {copied ? "Copied" : "Email"}
+              </motion.span>
+            </AnimatePresence>
+          </button>
         </nav>
       </motion.header>
 
-      {/* Projects */}
+      {/* Projects by category */}
       <motion.section variants={fadeUp} className="mt-16 md:mt-20">
-        <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-neutral-600">
-          Projects
-        </h2>
-        <div className="mt-8 space-y-1">
-          {projects.map((project) => {
-            const content = (
-              <>
-                <div className="flex items-center justify-between gap-4">
-                  <h3 className="text-[15px] font-medium text-neutral-300 transition-colors group-hover:text-neutral-100">
-                    {project.name}
-                  </h3>
-                  {project.href && (
-                    <span className="shrink-0 text-xs text-neutral-700 transition-colors group-hover:text-neutral-400">
-                      ↗
-                    </span>
-                  )}
-                </div>
-                <p className="mt-1 text-sm leading-relaxed text-neutral-500">
-                  {project.description}
-                </p>
-                <p className="mt-2 font-mono text-[11px] text-neutral-700 transition-colors group-hover:text-neutral-600">
-                  {project.tech.join(" · ")}
-                </p>
-              </>
-            );
-
-            const cls =
-              "group block -mx-3 px-3 py-4 rounded-lg transition-colors hover:bg-neutral-900/50";
-
-            return project.href ? (
-              project.internal ? (
-                <Link
-                  key={project.name}
-                  href={project.href}
-                  className={cls}
-                >
-                  {content}
-                </Link>
-              ) : (
-                <a
-                  key={project.name}
-                  href={project.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cls}
-                >
-                  {content}
-                </a>
-              )
-            ) : (
-              <div key={project.name} className={cls}>
-                {content}
+        {categories.map((cat, ci) => {
+          const catProjects = projects.filter((p) => p.category === cat.key);
+          return (
+            <div key={cat.key} className={ci > 0 ? "mt-12" : ""}>
+              <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-neutral-600">
+                {cat.label}
+              </h2>
+              <div className="mt-6 space-y-1">
+                {catProjects.map((project) => (
+                  <ProjectRow key={project.name} project={project} />
+                ))}
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </motion.section>
 
       {/* Work */}

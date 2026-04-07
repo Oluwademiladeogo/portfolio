@@ -6,15 +6,15 @@ import Link from "next/link";
 import type { AutomationProject } from "@/lib/automation-projects";
 
 const stagger = {
-  animate: { transition: { staggerChildren: 0.12 } },
+  animate: { transition: { staggerChildren: 0.1 } },
 };
 
 const fadeUp = {
-  initial: { opacity: 0, y: 10 },
+  initial: { opacity: 0, y: 8 },
   animate: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
+    transition: { duration: 0.45, ease: [0.25, 0.1, 0.25, 1] },
   },
 };
 
@@ -35,7 +35,7 @@ export default function ProjectDetail({
           href="/"
           className="text-sm text-neutral-600 transition-colors hover:text-neutral-400"
         >
-          &larr; Back
+          ← Back
         </Link>
       </motion.div>
 
@@ -51,10 +51,10 @@ export default function ProjectDetail({
         </p>
       </motion.header>
 
-      {/* Workflow screenshot */}
+      {/* Screenshot */}
       <motion.div
         variants={fadeUp}
-        className="mt-12 overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50"
+        className="mt-10 overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50"
       >
         <div className="relative aspect-video w-full">
           <Image
@@ -66,6 +66,32 @@ export default function ProjectDetail({
           />
         </div>
       </motion.div>
+
+      {/* Problem + Impact */}
+      {(project.problem || project.impact) && (
+        <motion.section variants={fadeUp} className="mt-12 space-y-10">
+          {project.problem && (
+            <div>
+              <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-neutral-600">
+                The Problem
+              </h2>
+              <p className="mt-4 text-[15px] leading-relaxed text-neutral-400">
+                {project.problem}
+              </p>
+            </div>
+          )}
+          {project.impact && (
+            <div>
+              <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-neutral-600">
+                Impact
+              </h2>
+              <p className="mt-4 text-[15px] leading-relaxed text-neutral-400">
+                {project.impact}
+              </p>
+            </div>
+          )}
+        </motion.section>
+      )}
 
       {/* How it works */}
       <motion.section variants={fadeUp} className="mt-12">
@@ -91,6 +117,24 @@ export default function ProjectDetail({
         </div>
       </motion.section>
 
+      {/* Video walkthrough */}
+      {project.youtubeId && (
+        <motion.section variants={fadeUp} className="mt-12">
+          <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-neutral-600">
+            Walkthrough
+          </h2>
+          <div className="mt-6 aspect-video overflow-hidden rounded-lg border border-neutral-800">
+            <iframe
+              src={`https://www.youtube.com/embed/${project.youtubeId}`}
+              title={`${project.name} walkthrough`}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="h-full w-full"
+            />
+          </div>
+        </motion.section>
+      )}
+
       <motion.footer
         variants={fadeUp}
         className="mt-16 border-t border-neutral-900 pt-6 pb-8"
@@ -99,7 +143,7 @@ export default function ProjectDetail({
           href="/"
           className="text-sm text-neutral-600 transition-colors hover:text-neutral-400"
         >
-          &larr; Back to home
+          ← Back to home
         </Link>
       </motion.footer>
     </motion.main>

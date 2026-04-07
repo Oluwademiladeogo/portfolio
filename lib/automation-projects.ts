@@ -4,6 +4,9 @@ export type AutomationProject = {
   description: string;
   tech: string[];
   screenshot: string;
+  youtubeId?: string;
+  problem?: string;
+  impact?: string;
   steps: { title: string; description: string }[];
 };
 
@@ -15,6 +18,10 @@ export const automationProjects: AutomationProject[] = [
       "End-to-end automation that detects missed calls, texts back in under 60 seconds, qualifies leads via conversational AI, and books appointments — fully autonomous, 24/7.",
     tech: ["n8n", "Twilio", "OpenAI", "Airtable", "Cal.com"],
     screenshot: "/projects/missed-call-recovery.png",
+    problem:
+      "Service businesses lose 30–50% of potential clients from missed calls. The window to respond is under five minutes — most businesses follow up hours later, after the prospect has already moved on to a competitor.",
+    impact:
+      "Responds to every missed call in under 60 seconds. Qualifies leads and books appointments 24/7 with zero human involvement — the business wakes up to booked calendars.",
     steps: [
       {
         title: "Missed call detected",
@@ -34,12 +41,12 @@ export const automationProjects: AutomationProject[] = [
       {
         title: "Appointment booked",
         description:
-          "Qualified leads are automatically booked on the business calendar via Cal.com with all collected details.",
+          "Qualified leads are automatically booked on the business calendar via Cal.com with all collected details pre-filled.",
       },
       {
         title: "CRM + owner alert",
         description:
-          "Lead is logged in Airtable with full transcript and scoring. Owner gets a real-time email notification.",
+          "Lead is logged in Airtable with full conversation transcript and lead score. Owner receives a real-time email notification.",
       },
     ],
   },
@@ -50,6 +57,10 @@ export const automationProjects: AutomationProject[] = [
       "Generates tailored client proposals with ROI projections, service breakdowns, and pricing — built on structured data extraction and templated AI output.",
     tech: ["n8n", "OpenAI", "Airtable"],
     screenshot: "/projects/proposal-generator.png",
+    problem:
+      "Writing custom proposals takes 2–4 hours per prospect. Most agencies send barely-modified boilerplate — clients can tell, and it kills conversion rates before the conversation even starts.",
+    impact:
+      "Generates a fully tailored, ROI-projected proposal in under 3 minutes. Each proposal is genuinely personalized to the client's business context, not a template with names swapped in.",
     steps: [
       {
         title: "Client data intake",
@@ -69,7 +80,7 @@ export const automationProjects: AutomationProject[] = [
       {
         title: "Formatted output",
         description:
-          "Final proposal is formatted into a clean, client-ready document and stored for review or auto-delivery.",
+          "Final proposal is formatted into a clean, client-ready document and stored in Airtable for review or auto-delivery.",
       },
     ],
   },
@@ -80,6 +91,10 @@ export const automationProjects: AutomationProject[] = [
       "Scrapes business listings, verifies emails, scores leads, and pushes qualified prospects into outreach sequences — fully automated prospecting.",
     tech: ["n8n", "Google Maps API", "Email Verification", "Airtable"],
     screenshot: "/projects/lead-enrichment.png",
+    problem:
+      "Manual prospecting is slow, inconsistent, and expensive. Sales reps spend 40% of their time on research that could be automated — and most of that data goes stale before it gets used.",
+    impact:
+      "Generates a verified, scored prospect list on demand. Qualified leads flow directly into outreach sequences — no manual research, no bad data, no wasted time.",
     steps: [
       {
         title: "Business discovery",
@@ -89,12 +104,12 @@ export const automationProjects: AutomationProject[] = [
       {
         title: "Data extraction",
         description:
-          "Pulls business name, phone, website, address, and owner details into a structured dataset.",
+          "Pulls business name, phone, website, address, and owner details into a structured, deduplicated dataset.",
       },
       {
         title: "Email verification",
         description:
-          "Discovers and verifies business email addresses, filtering out invalid or catch-all domains.",
+          "Discovers and verifies business email addresses, filtering out invalid addresses and catch-all domains.",
       },
       {
         title: "Lead scoring + CRM push",
@@ -110,6 +125,10 @@ export const automationProjects: AutomationProject[] = [
       "Automated multi-step cold email sequences with personalization, follow-up scheduling, and reply monitoring — hands-off lead nurturing.",
     tech: ["n8n", "Gmail API", "OpenAI", "Airtable"],
     screenshot: "/projects/outreach-dispatcher.png",
+    problem:
+      "Cold outreach fails at scale because personalization breaks down past a few dozen contacts. Generic templates get ignored — but writing individual emails doesn't scale.",
+    impact:
+      "Runs fully personalized multi-step sequences for hundreds of leads simultaneously. Detects replies and pauses sequences automatically — no manual monitoring needed.",
     steps: [
       {
         title: "Sequence triggered",
@@ -124,7 +143,7 @@ export const automationProjects: AutomationProject[] = [
       {
         title: "Automated follow-ups",
         description:
-          "Scheduled follow-up emails fire at configured intervals — each with varied messaging to avoid fatigue.",
+          "Scheduled follow-up emails fire at configured intervals — each with varied messaging and framing to avoid fatigue.",
       },
       {
         title: "Reply monitoring",
@@ -140,6 +159,10 @@ export const automationProjects: AutomationProject[] = [
       "Real-time arbitrage detection across binary prediction markets — scans every 45s for pricing inefficiencies.",
     tech: ["Node.js", "Polymarket API"],
     screenshot: "/projects/polymarket-bot.png",
+    problem:
+      "Prediction market arbitrage windows are narrow and close in minutes. Monitoring dozens of correlated markets manually isn't viable — by the time you spot the mispricing, it's gone.",
+    impact:
+      "Catches mispricing windows across all active markets in real time. Surfaces only opportunities above a configurable profit threshold — no noise, no false positives.",
     steps: [
       {
         title: "Market scanning",
@@ -159,7 +182,7 @@ export const automationProjects: AutomationProject[] = [
       {
         title: "Alert dispatch",
         description:
-          "Flags profitable arbitrage windows in real time so positions can be taken before the market corrects.",
+          "Flags profitable arbitrage windows in real time so positions can be taken before the market self-corrects.",
       },
     ],
   },
