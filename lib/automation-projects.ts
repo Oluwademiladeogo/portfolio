@@ -243,6 +243,7 @@ export const automationProjects: AutomationProject[] = [
       "Preemptive risk-based vulnerability management for regulated industries — autonomous threat intelligence, real-time AI streaming, multi-tenant SaaS.",
     tech: ["Node.js", "Fastify", "PostgreSQL", "Lambda", "WebSocket"],
     screenshot: "/projects/lusic-ai.png",
+    liveUrl: "https://lusic.ai",
     problem:
       "Security teams in regulated industries are drowning in vulnerability alerts with no clear prioritisation. Standard scanners output raw CVE lists — leaving analysts to manually figure out what actually matters to the business before they can act.",
     impact:
