@@ -248,7 +248,7 @@ export default function Home() {
         <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-neutral-400">
           I build AI systems that do what most companies hire people to do —
           screen candidates, generate and qualify leads, book appointments, and
-          run operations. Autonomous, at scale, around the clock.
+          run operations. No oversight. No downtime. No headcount.
         </p>
 
         <nav className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
