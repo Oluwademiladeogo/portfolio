@@ -46,7 +46,7 @@ export default function ProjectDetail({
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-md border border-neutral-700 bg-neutral-900 px-4 py-2 text-sm font-medium text-neutral-200 transition-colors hover:border-neutral-500 hover:text-white"
           >
-            Try it live ↗
+            Try it live
           </a>
         )}
       </motion.div>
