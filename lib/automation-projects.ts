@@ -21,6 +21,7 @@ export const automationProjects: AutomationProject[] = [
       "AI voice agent that screens thousands of candidates autonomously — trait-based scoring, real-time transcription, automated report generation.",
     tech: ["NestJS", "Vapi.ai", "PostgreSQL", "BullMQ", "Next.js"],
     screenshot: "/projects/pruun.png",
+    liveUrl: "https://pruun.xyz",
     problem:
       "Screening candidates at scale is expensive and slow. Recruiters spend 60–70% of their time on initial phone screens — most of which filter out unqualified candidates before a real conversation ever happens.",
     impact:
