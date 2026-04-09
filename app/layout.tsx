@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { personSchema } from "@/lib/schema";
+import { CursorDot } from "@/components/cursor";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -61,6 +62,7 @@ export default function RootLayout({
         className={`${inter.variable} ${jetbrainsMono.variable} min-h-screen bg-black font-sans antialiased`}
         suppressHydrationWarning
       >
+        <CursorDot />
         {children}
       </body>
     </html>
