@@ -146,10 +146,13 @@ const work: {
   },
 ];
 
-const STATS = [
+const STATS: (
+  | { value: number; suffix: string; display?: never; label: string }
+  | { display: string; value?: never; suffix?: never; label: string }
+)[] = [
   { value: 8, suffix: "", label: "projects shipped" },
-  { value: 3, suffix: "", label: "products live" },
-  { value: 60, suffix: "s", label: "fastest response" },
+  { value: 3, suffix: "", label: "in production" },
+  { display: "24/7", label: "autonomous runtime" },
 ];
 
 const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
@@ -430,7 +433,9 @@ export default function Home() {
             {STATS.map((stat) => (
               <div key={stat.label}>
                 <p className="font-mono text-2xl font-bold tabular-nums text-white md:text-3xl">
-                  <CountUp to={stat.value} suffix={stat.suffix} />
+                  {stat.display ?? (
+                    <CountUp to={stat.value!} suffix={stat.suffix!} />
+                  )}
                 </p>
                 <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.18em] text-neutral-700">
                   {stat.label}
